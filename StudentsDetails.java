@@ -27,7 +27,7 @@ public class StudentsDetails {
         }
     }
 
-    //Method to collect the scores
+    //Method to collect the scores linked with the loop from students and ids
     public static void collectScores(int[][] scores, Scanner input) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
