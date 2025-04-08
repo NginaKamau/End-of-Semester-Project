@@ -38,15 +38,40 @@ public class StudentsDetails {
         }
     }
 
-    //Method to display student info
+    public static String calculateGrade(double average) {
+        if (average >= 70) {
+            return "A";
+        } else if (average >= 60) {
+            return "B";
+        } else if (average >= 50) {
+            return "C";
+        } else if (average >= 40) {
+            return "D";
+        } else {
+            return "REP/RET";
+        }
+    }
+
     public static void showStudentInfo(String[] names, String[] ids, int[][] scores) {
         System.out.println("\nStudent Records:\n");
         for (int i = 0; i < 10; i++) {
+            int total = 0; 
+            
             System.out.print("Student Name: " + names[i] + ", Student ID: " + ids[i] + ", Scores: ");
             for (int j = 0; j < 5; j++) {
                 System.out.print(scores[i][j] + " ");
+                total += scores[i][j];
             }
+    
+            double average = total / 5.0;
+            String grade = calculateGrade(average);
+    
+            System.out.println("| Average: " + average + ", Grade: " + grade);
             System.out.println();
         }
     }
+    
+    
+    
 }
+
