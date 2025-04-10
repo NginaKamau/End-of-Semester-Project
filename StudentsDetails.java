@@ -53,25 +53,58 @@ public class StudentsDetails {
     }
 
     public static void showStudentInfo(String[] names, String[] ids, int[][] scores) {
-        System.out.println("\nStudent Records:\n");
-        for (int i = 0; i < 10; i++) {
-            int total = 0; 
-            
-            System.out.print("Student Name: " + names[i] + ", Student ID: " + ids[i] + ", Scores: ");
-            for (int j = 0; j < 5; j++) {
-                System.out.print(scores[i][j] + " ");
-                total += scores[i][j];
-            }
-    
-            double average = total / 5.0;
-            String grade = calculateGrade(average);
-    
-            System.out.println("| Average: " + average + ", Grade: " + grade);
-            System.out.println();
+
+    //Title
+    System.out.println("\n============ STRATHMORE UNIVERSITY REPORT CARD ============");
+    //Show generated time
+    System.out.println("Generated on: " + LocalDate.now() + "\n");
+
+    for (int i = 0; i < 10; i++) 
+    {
+        // Calculate total and average
+        int total = 0;
+        for (int j = 0; j < 5; j++) 
+        {
+            total += scores[i][j];
         }
+        double average = total / 5.0;
+        String grade = calculateGrade(average);
+        String recommendation = getRecommendation(grade);
+
+        // Print student details
+        System.out.println("STUDENT NAME: " + names[i]);
+        System.out.println("ID NUMBER: " + ids[i]);
+        System.out.println("----------------------------------------");
+
+        // Print subjects and scores
+        System.out.println("SUBJECTS:");
+        for (int j = 0; j < 5; j++) 
+        {
+            System.out.printf("  Subject %d: %d\n", j + 1, scores[i][j]);
+        }
+
+        // Print summary
+        System.out.println("----------------------------------------");
+        System.out.printf("AVERAGE SCORE: %.1f\n", average);
+        System.out.println("GRADE: " + grade);
+        System.out.println("RECOMMENDATION: " + recommendation);
+        System.out.println("\n"); 
     }
-    
+}
+
+// Method for generating recommendation
+public static String getRecommendation(String grade) 
+{
+    return switch (grade) 
+    {
+        case "A" -> "EXCELLENT (First Class)";
+        case "B" -> "GOOD (Second Class Upper)";
+        case "C" -> "AVERAGE (Second Class Lower)";
+        case "D" -> "POOR (Pass)";
+        case "E" -> "FAIL (Retake/Repeat)";
+        default -> "INVALID GRADE";
+    };
+}
     
     
 }
-
